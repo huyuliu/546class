@@ -203,3 +203,8 @@ $ sed -i "s/\?/-/g" teosinte_chr*_sort_r.txt
 
 Same with maize data, but work on teosinte data.
 
+###Organize Files
+
+I moved maize files and teosinte files into separate folders, and the final files are in the folder called `result` inside both `maize` and `teosinte` folders.
+
+
