@@ -1,8 +1,8 @@
-#UNIX Assignment
+# UNIX Assignment
 
-##Data Inspection
+## Data Inspection
 
-###Attributes of `fang_et_al_genotypes`
+### Attributes of `fang_et_al_genotypes`
 
 ```linux
 $ less fang_et_al_genotypes.txt
@@ -22,7 +22,7 @@ By inspecting this file I learned that:
 * The size of the file is 6.1M.
 * It has 986 columns.
 
-###Attributes of `snp_position.txt`
+### Attributes of `snp_position.txt`
 
 ```linux
 $ less snp_position.txt
@@ -42,7 +42,7 @@ By inspecting this file I learned that:
 * The size of the file is 38K.
 * It has 15 columns.
 
-##Data Processing
+## Data Processing
 
 ```linux
 $ sort -k3 fang_et_al_genotypes.txt > genotypes_sort.txt
@@ -107,7 +107,7 @@ I tested different code and cannot solve it, so I just manually adjusted them.
 After that, I changed `Sample_ID` in genotype file into `SNP_ID` to match with SNP file, and merged them again. Even it still gave me warning, it actually worked.
 In the end, I moved headers to the first three lines and counted how many maize samples and how many teosinte samples inside the file, and separated them.
 
-###Maize Data
+### Maize Data
 
 ```linux
 $ head -n 1 maize_all.txt | awk  -F "\t" '{for(i=1;i<=NF;i++){if($i~/Chromosome/)print i}}'
@@ -157,7 +157,7 @@ Separate SNPs into each file based on chromosome and multiposition.
 Sort each file based on position.
 Sort file in reverse order based on position and replace `?` by `-`.
 
-###Teosinte Data
+### Teosinte Data
 
 ```linux
 $ head -n 1 teosinte_all.txt | awk  -F "\t" '{for(i=1;i<=NF;i++){if($i~/Chromosome/)print i}}'
@@ -203,7 +203,7 @@ $ sed -i "s/\?/-/g" teosinte_chr*_sort_r.txt
 
 Same with maize data, but work on teosinte data.
 
-###Organize Files
+### Organize Files
 
 I moved maize files and teosinte files into separate folders, and the final files are in the folder called `result` inside both `maize` and `teosinte` folders.
 
