@@ -2,3 +2,5 @@
 .Rhistory
 .RData
 .Ruserdata
+graphs/
+./R_class/graphs/
