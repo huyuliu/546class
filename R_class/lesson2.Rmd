@@ -55,6 +55,13 @@ list(1:10, "whatever", TRUE)
 z <- c(list(1), "a")
 as.vector(z)
 unlist(z)
+c <- 1:12
+dim(c) <- c(3,4)
+c
+t(c)
+dim(c) <- c(4,3)
+c
+t(c)
 ```
 
 list can also storage vector elements inside.
