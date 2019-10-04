@@ -1,0 +1,37 @@
+---
+title: "lesson5"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r}
+library(tidyverse)
+dvst <- read_csv("https://raw.githubusercontent.com/vsbuffalo/bds-files/master/chapter-08-r/Dataset_S1.txt") %>% 
+  mutate(diversity = Pi / (10*1000), cent = (start >= 25800000 & end <= 29700000)) %>% 
+  rename(percent.GC = `%GC`, total.SNPs = `total SNPs`, total.Bases = `total Bases`, reference.Bases = `reference Bases`)
+dvst <- mutate(dvst, position = (end + start) / 2)
+ggplot(data = dvst) + geom_point(mapping=aes(x=position, y=diversity))
+ggplot(data = dvst) + geom_point(mapping = aes(x=position, y=diversity, color=cent))
+ggplot(data = dvst) + geom_point(mapping = aes(x=position, y=diversity, size = start))
+ggplot(data = dvst) + geom_point(mapping = aes(x=position, y=diversity, color = start))
+ggplot(data = dvst) + geom_point(mapping = aes(x=position, y=position, color = position))
+ggplot(data = dvst) + geom_point(mapping = aes(x=position, y=diversity, colour = percent.GC < 50))
+ggplot(data = dvst) + geom_point(mapping = aes(x=position, y=diversity), alpha=0.01)
+ggplot(data = dvst) + geom_point(mapping = aes(x=position, y=diversity, alpha=0.01))
+ggplot(data = dvst) + geom_density(mapping = aes(x=diversity), fill="blue")
+ggplot(data = dvst) + geom_density(mapping = aes(x=diversity), fill=rgb(190,120,207, max=255))
+ggplot(data = dvst, mapping = aes(x=depth, y=total.SNPs)) + geom_point(alpha=0.1) + geom_smooth()
+ggplot(data = dvst) + geom_bar(mapping = aes(x = cent))
+ggplot(dvst) + geom_histogram(aes(x=Pi), binwidth=1) + scale_x_continuous(limits=c(0.01, 80))
+ggplot(dvst) + geom_histogram(aes(x=Pi), binwidth=0.05) + scale_x_continuous(limits=c(0.01, 80))
+ggplot(dvst) + geom_histogram(aes(x=Pi), binwidth=0.5) + scale_x_continuous(limits=c(0.01, 80))
+ggplot(dvst) + geom_histogram(aes(x=Pi), binwidth=1.5) + scale_x_continuous(limits=c(0.01, 80))
+ggplot(dvst) + geom_histogram(aes(x=Pi), binwidth=10) + scale_x_continuous(limits=c(0.01, 80))
+```
+
+

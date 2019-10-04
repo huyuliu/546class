@@ -1,0 +1,31 @@
+---
+title: "lesson4"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r}
+install.packages("tidyverse")
+library(tidyverse)
+```
+```{r}
+dvst <- read_csv("https://raw.githubusercontent.com/vsbuffalo/bds-files/master/chapter-08-r/Dataset_S1.txt")
+colnames(dvst)[12] <- "percent.GC" #rename X.GC columns
+dvst$GC.binned <- cut(dvst$percent.GC, 5) # create a new column from existing dat
+summary(dvst$`total SNPs`)
+# or with dplyr
+summary(select(dvst,`total SNPs`)) #this does not look simpler, but wait...
+filter(dvst,`total SNPs` >= 85)
+filter(dvst, Pi > 16, percent.GC > 80)
+new_df <- filter(dvst, Pi > 16, percent.GC > 80)
+filter(dvst, total.SNPs %in% c(0,1,2))
+filter(dvst, is.na(Divergence))
+mutate(dvst, cent = start >= 25800000 & end <= 29700000)
+dvst
+mutate(dvst, diversity = Pi / (10*1000)) # rescale, removing 10x and making per bp
+```
