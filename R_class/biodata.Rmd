@@ -1,0 +1,76 @@
+---
+title: "biodata"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+
+```{r cars}
+getwd()
+#source("http://bioconductor.org/biocLite.R")
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install()
+BiocManager::install("GenomicRanges")
+library(IRanges)
+rng <- IRanges(start=4, end=13)
+rng2 <- IRanges(start=4, width=3)
+x <- IRanges(start=c(4, 7, 2, 20), end=c(13, 7, 5, 23))
+names(x) <- letters[1:4]
+class(x)
+end(x) <- end(x) + 4
+range(x)
+x[2:3]
+start(x) < 5
+x[start(x) < 5]
+x[width(x) > 8]
+a <- IRanges(start=7, width=4)
+b <- IRanges(start=2, end=5)
+c <- c(a, b)
+x <- IRanges(start=c(40, 80), end=c(67, 114))
+x + 4L
+x - 10L #L add or reduce on both sides.
+y <- IRanges(start=c(4, 6, 10, 12), width=13)
+restrict(y, 5, 10)
+flank(x, width=7)
+flank(x, width=7, start=FALSE)
+promoters <- flank(x, width=20)
+set.seed(0)
+alns <- IRanges(start=sample(seq_len(50), 20), width=5)
+reduce(alns)
+gaps(alns)
+a <- IRanges(start=4, end=13)
+b <- IRanges(start=12, end=17)
+setdiff(a,b)
+setdiff(b,a)
+union(a,b)
+intersect(a,b)
+qry <- IRanges(start=c(1, 26, 19, 11, 21, 7), end=c(16, 30, 19, 15, 24, 8),
+         names=letters[1:6])
+sbj <- IRanges(start=c(1, 19, 10), end=c(5, 29, 16), names=letters[24:26])
+hts <- findOverlaps(qry, sbj)
+names(qry)[queryHits(hts)]
+names(sbj)[subjectHits(hts)]
+hts_within <- findOverlaps(qry, sbj, type="within")
+findOverlaps(qry, sbj, select="first")
+findOverlaps(qry, sbj, select="last")
+findOverlaps(qry, sbj, select="arbitrary")
+countOverlaps(qry, sbj)
+subsetByOverlaps(qry, sbj)
+qry <- IRanges(start=6, end=13, name='query')
+sbj <- IRanges(start=c(2, 4, 18, 19), end=c(4, 7, 21, 24), names=1:4)
+nearest(qry, sbj)
+precede(qry, sbj)
+follow(qry, sbj)
+qry <- IRanges(sample(seq_len(1000), 5), width=10) 
+sbj <- IRanges(sample(seq_len(1000), 5), width=10)
+distanceToNearest(qry, sbj)
+distance(qry, sbj)
+
+```
+
